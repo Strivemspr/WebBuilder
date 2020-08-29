@@ -13,6 +13,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('themes.italian.italian');
-});
+// Single Restaurant Routes
+Route::resource('restaurant', 'RestaurantsController');
+
+// Auth Routes
+Auth::routes();
+
+// Home Routes
+Route::get('/', 'PagesController@index');
+
+// Dashboard Routes
+Route::get('/dashboard', 'DashboardController@index');
+Route::post('/dashboard', 'DashboardController@store');
+Route::get('/dashboard/restaurant', 'DashboardController@restaurant');
+Route::get('/dashboard/restaurant/{id}/edit', 'DashboardController@edit');
+Route::delete('/dashboard/restaurant/{id}', 'DashboardController@destroy');
+Route::get('/dashboard/user', 'DashboardController@user');
+Route::put('/dashboard/user/{id}', 'DashboardController@userUpdate');
+
+// Dashboard Form Routes
+Route::post('/dashboard/restaurant/{id}', 'DashboardController@storeRestaurantDetails');
+Route::put('/dashboard/restaurant/{id}', 'DashboardController@update');
+
+// Menu Routes
+Route::post('/dashboard/restaurant/{id}/{menu_id}', 'MenuController@create');
+Route::put('/dashboard/restaurant/{id}/{menu_id}', 'MenuController@update');
+Route::delete('/dashboard/restaurant/{id}/{menu_id}', 'MenuController@delete');
+
+
