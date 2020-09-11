@@ -5,7 +5,8 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Edit Restaurant Details</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <input id="generateWebsite" type="submit" class="btn btn-primary mr-2" value="Generate Website">
+            <a class="btn btn-primary mr-2" href="/restaurant">Generate Website</a>
+            {{-- <input id="generateWebsite" type="submit" class="btn btn-primary mr-2" value="Generate Website"> --}}
             @include('inc.createRestaurantButton')
         </div>
     </div>
@@ -14,6 +15,7 @@
         <h1>Details</h1>
         <hr>
         <div class="row">
+            <input hidden id="restaurantId" data-id="{{$restaurant->id}}">
             <div class="col-6">
                 <h4><span class="badge badge-primary">Restaurant Name</span></h4>
                 <p>{{$restaurant->name}}</p>
@@ -42,5 +44,6 @@
         @include('forms.socialMedia')
     </div>
 
+    @include('forms.addMenuItems')
     @include('forms.menu')
 @endsection

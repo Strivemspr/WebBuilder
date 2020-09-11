@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use App\Restaurant;
 use App\OpeningHours;
+use App\Category;
 use App\SocialMedia;
 use App\User;
 
@@ -56,7 +57,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $types = $this->types;
         $times = $this->times;

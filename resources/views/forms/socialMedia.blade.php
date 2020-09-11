@@ -1,4 +1,4 @@
-<div class="accordion col-md-4 mb-4" id="social">
+<div class="accordion col-lg-4 mb-4" id="social">
     <div class="card">
         <div class="card-header m-0 p-0 border-bottom-0" id="headingThree">
             <div class="input-group d-flex justify-content-between">

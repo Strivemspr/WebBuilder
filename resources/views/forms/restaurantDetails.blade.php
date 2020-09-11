@@ -78,7 +78,6 @@
                                     <option value="{{$type}}">{{ucfirst(trans($type))}}</option>
                                 @endif
                             @endforeach
-                            <option>Italian</option>
                         @else
                             <option selected disabled hidden>Choose a restaurant type</option>
                             @foreach ($types as $type)

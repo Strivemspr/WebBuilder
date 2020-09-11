@@ -37,16 +37,30 @@
                                 <label for="dishIngredients">Dish Ingredients</label>
                                 <input type="text" name="dishIngredients" class="form-control" id="dishIngredients" value="{{$dish->ingredients}}" placeholder="Dish Ingredients">
                             </div>
-                            <div class="form-group col-lg-3 col-md-6 col-sm-6">
+                            {{-- <div class="form-group col-lg-3 col-md-6 col-sm-6">
                                 <label for="dishType">Dish Type</label>
                                 <input type="text" name="dishType" class="form-control" id="dishType" value="{{$dish->type}}" placeholder="Dish Type">
-                            </div>
+                            </div> --}}
                             <div class="col-lg-3">
+                                <label for="dishType">Dish Type</label>
+                                <select name="dishType" class="form-control" id="dishType">
+                                    @if ($restaurant->categories && $restaurant->categories->categories)
+                                        @foreach (explode(',',$restaurant->categories->categories) as $category)
+                                            @if($dish->type == $category)
+                                                <option selected value="{{$category}}">{{$category}}</option>
+                                            @else
+                                                <option value="{{$category}}">{{$category}}</option>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <option selected hidden disabled>There are no categories yet</option>
+                                    @endif
+                                </select>
                             </div>
                         </div>
                     </form>
                     <div class="d-flex">
-                        <input type="button" name="dishId" class="btn btn-success mr-2" value="Item: {{$dish->id}}">
+                        <input type="button" name="dishId" class="btn btn-primary mr-2" value="Item: {{$dish->id}}">
                         <input type="submit" class="btn btn-success mr-2" value="Update" onclick="document.querySelector('#menuForm{{$dish->id}}').submit()">
                         <form method="POST" action="/dashboard/restaurant/{{$restaurant->id}}/{{$dish->id}}">
                             @csrf
@@ -56,6 +70,8 @@
                     </div>
                 </div>
                 @endforeach
+            @else
+                <p>You have not added any restaurant dishes</p>
             @endif
         </div>
     </div>

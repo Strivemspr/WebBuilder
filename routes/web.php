@@ -36,8 +36,12 @@ Route::post('/dashboard/restaurant/{id}', 'DashboardController@storeRestaurantDe
 Route::put('/dashboard/restaurant/{id}', 'DashboardController@update');
 
 // Menu Routes
-Route::post('/dashboard/restaurant/{id}/{menu_id}', 'MenuController@create');
+Route::post('/dashboard/restaurant/{id}/menu', 'MenuController@create');
 Route::put('/dashboard/restaurant/{id}/{menu_id}', 'MenuController@update');
 Route::delete('/dashboard/restaurant/{id}/{menu_id}', 'MenuController@delete');
+
+// Category Routes
+Route::post('/dashboard/restaurant/{id}/category', 'MenuController@createCategory');
+Route::put('/dashboard/restaurant/{id}/category/{category_id}', 'MenuController@updateCategory');
 
 

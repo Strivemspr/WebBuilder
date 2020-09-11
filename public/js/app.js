@@ -39752,7 +39752,95 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// Add Elements Dinamically To The Manu Form
+var form = document.querySelector('#addMenuItemsForm');
+var buttonAdd = document.querySelector('#buttonAdd');
+var buttonRemove = document.querySelector('#buttonRemove');
+var currentItems = Array.from(document.querySelectorAll('#addMenuItemsForm > div'));
+var categories = [];
+buttonAdd.addEventListener('click', addItem);
+buttonRemove.addEventListener('click', removeItem);
+var count = currentItems.length;
 
+function addItem() {
+  getCateriesOptions();
+  count = count + 1;
+  var html = "\n    <div class=\"form-row bg-light mb-3 p-4 dish-items\">\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishName2\">Dish Name: <span class=\"badge badge-primary\"></span></label>\n            <input type=\"text\" name=\"dishName[]\" class=\"form-control\" id=\"dishName".concat(count, "\" value=\"\" placeholder=\"Dish Name\">\n        </div>\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishPrice2\">Dish Price</label>\n            <input type=\"text\" name=\"dishPrice[]\" class=\"form-control\" id=\"dishPrice").concat(count, "\" value=\"\" placeholder=\"Dish Price\">\n        </div>\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishIngredients2\">Dish Ingredients</label>\n            <input type=\"text\" name=\"dishIngredients[]\" class=\"form-control\" id=\"dishIngredients").concat(count, "\" value=\"\" placeholder=\"Dish Ingredients\">\n        </div>\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishType2\">Dish Type</label>\n            <select name=\"dishType[]\" class=\"form-control\" id=\"dishType").concat(count, "\">\n                ").concat(function () {
+    var html = "";
+
+    if (categories.length > 0) {
+      html = "<option selected disabled hidden>Please Select A Category</option>";
+
+      for (var _count = 0; _count < categories.length; _count++) {
+        html += "<option value=\"".concat(categories[_count], "\">").concat(categories[_count], "</option>");
+      }
+
+      return html;
+    } else {
+      return html = "<option selected disabled value=\"null\">There are no categories yet</option>";
+    }
+  }(), "\n            </select>\n        </div>\n    </div>\n");
+  form.innerHTML += html;
+}
+
+function removeItem() {
+  if (count > 1) {
+    form.removeChild(form.lastElementChild);
+    count--;
+  }
+}
+
+function getCateriesOptions() {
+  if (categories.length > 0) {
+    return;
+  }
+
+  var itemCategories = document.querySelector('#dishType1');
+
+  for (var _count2 = 0; _count2 < itemCategories.options.length; _count2++) {
+    if (_count2 === 0) {
+      continue;
+    }
+
+    categories.push(itemCategories.options[_count2].text);
+  }
+} // Delete Elements from Update Form
+
+
+var categoriesForm = document.querySelector('#menuCategories');
+categoriesForm.addEventListener('click', deleteMenuCategory);
+
+function deleteMenuCategory(event) {
+  event.preventDefault();
+
+  if (event.target.classList.contains("delete")) {
+    var item = event.target.closest('.categoryItem');
+    item.remove();
+  }
+} // Categories and Dish items add and remove categories
+
+
+var buttonAddCategory = document.querySelector('#buttonAddCategory');
+var buttonRemoveCategory = document.querySelector('#buttonRemoveCategory');
+var categoryItemsContainer = document.querySelector("#categoryItems");
+var currentCategoryItems = Array.from(document.querySelectorAll('#categoryItems > div'));
+var categoryItemsCount = currentCategoryItems.length;
+buttonAddCategory.addEventListener('click', addCategory);
+buttonRemoveCategory.addEventListener('click', removeCategory);
+
+function addCategory() {
+  categoryItemsCount = categoryItemsCount + 1;
+  var html = "\n        <div class=\"form-group m-1\">\n            <label for=\"category".concat(categoryItemsCount, "\">Category ").concat(categoryItemsCount, "</label>\n            <input type=\"text\" name=\"category[]\" class=\"form-control\" id=\"category").concat(categoryItemsCount, "\" placeholder=\"Category\">\n        </div>\n    ");
+  console.log(categoryItemsContainer);
+  categoryItemsContainer.innerHTML += html;
+}
+
+function removeCategory() {
+  if (categoryItemsCount > 1) {
+    categoryItemsContainer.removeChild(categoryItemsContainer.lastElementChild);
+    categoryItemsCount--;
+  }
+}
 
 /***/ }),
 

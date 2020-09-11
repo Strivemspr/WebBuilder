@@ -22,4 +22,8 @@ class Restaurant extends Model
     public function socialMedia() {
         return $this->hasOne('App\SocialMedia');
     }
+
+    public function categories() {
+        return $this->hasOne('App\Category');
+    }
 }

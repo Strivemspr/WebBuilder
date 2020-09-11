@@ -1,4 +1,4 @@
-<div class="accordion col-md-8 mb-4" id="openingHours">
+<div class="accordion col-lg-8 mb-4" id="openingHours">
     <div class="card">
         <div class="card-header m-0 p-0 border-bottom-0" id="headingTwo">
             <div class="input-group d-flex justify-content-between">
