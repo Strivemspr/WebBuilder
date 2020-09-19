@@ -5,7 +5,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Edit Restaurant Details</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a class="btn btn-primary mr-2" href="/restaurant">Generate Website</a>
+            <a class="btn btn-primary mr-2" href="/restaurant/{{$restaurant->id}}/{{$restaurant->type}}">Generate Website</a>
             {{-- <input id="generateWebsite" type="submit" class="btn btn-primary mr-2" value="Generate Website"> --}}
             @include('inc.createRestaurantButton')
         </div>

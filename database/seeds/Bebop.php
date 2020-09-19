@@ -1,0 +1,268 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class Bebop extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('menus')->insert(
+            [
+                // Sauces
+                [
+                    'name' => 'Teryiaki sauce', 
+                    'price' => 0,
+                    'ingredients' => '', 
+                    'type' => 'sauces',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Oyster sauce', 
+                    'price' => null, 
+                    'ingredients' => '', 
+                    'type' => 'sauces',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Chilli sauce', 
+                    'price' => 0, 
+                    'ingredients' => '', 
+                    'type' => 'sauces',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Hot chilli sauce', 
+                    'price' => 0, 
+                    'ingredients' => '', 
+                    'type' => 'sauces',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                //Soups
+                [
+                    'name' => 'Kim-Chi Jigare', 
+                    'price' => 17.00, 
+                    'ingredients' => 'Pork, Kimchi, Soup, Rice', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Soybean paste soup', 
+                    'price' => 17.00, 
+                    'ingredients' => 'Seafood soybean paste and Rice', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Seafood Kal-Kuksu', 
+                    'price' => 15.00, 
+                    'ingredients' => 'Homemade noodle in Seafood and Vegie soup', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Yookaejhang', 
+                    'price' => 17.00, 
+                    'ingredients' => 'Spicy beef soup, Rice', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Gai-bitang', 
+                    'price' => 17.00, 
+                    'ingredients' => 'Beef rib soup, Rice', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Ai-tang', 
+                    'price' => 17.00, 
+                    'ingredients' => 'Fish roe soup, Rice', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Kimchi kal- kukso', 
+                    'price' => 15, 
+                    'ingredients' => 'Handmade noodle in Kimchi soup', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Kimchi sujebi', 
+                    'price' => 15, 
+                    'ingredients' => 'Hand-pulled dough and Kimchi soup', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Dumpling kal kuksu', 
+                    'price' => 15, 
+                    'ingredients' => 'Handmade noodle with Dumpling soup', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Yookaejhang kal kuksu', 
+                    'price' => 15.00, 
+                    'ingredients' => 'Handmade noodle with Spicy beef soup', 
+                    'type' => 'soups',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                // Sizzling plates
+                [
+                    'name' => 'Bulgoggi', 
+                    'price' => 17.00, 
+                    'ingredients' => 'BBQ beef', 
+                    'type' => 'sizzling plates',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Spicy Pork', 
+                    'price' => 17.00, 
+                    'ingredients' => '', 
+                    'type' => 'sizzling plates',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Chicken', 
+                    'price' => 17.00, 
+                    'ingredients' => '', 
+                    'type' => 'sizzling plates',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Squid', 
+                    'price' => 17.00, 
+                    'ingredients' => '', 
+                    'type' => 'sizzling plates',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Tofu Kimchi', 
+                    'price' => 17.00, 
+                    'ingredients' => 'Tofu with stir fried Kimchi', 
+                    'type' => 'sizzling plates',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Bulgoggi Combo', 
+                    'price' => 20.00, 
+                    'ingredients' => 'Bulgoggi, Soybean paste soup', 
+                    'type' => 'sizzling plates',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Squid combo', 
+                    'price' => 20.00, 
+                    'ingredients' => '', 
+                    'type' => 'sizzling plates',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                // Noodles
+                [
+                    'name' => 'Ra-bokki', 
+                    'price' => 13.00, 
+                    'ingredients' => 'Spicy rice cake and ramen noodle', 
+                    'type' => 'noodles',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Hotstone Bibimbop', 
+                    'price' => 15.00, 
+                    'ingredients' => '', 
+                    'type' => 'noodles',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Fresh BIBIMBOP', 
+                    'price' => 15.00, 
+                    'ingredients' => '', 
+                    'type' => 'noodles',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                // Combos
+                [
+                    'name' => 'Any Bibimbop + Spicy Tofu Soup', 
+                    'price' => 18.00, 
+                    'ingredients' => 'Tofu, Bibimbop', 
+                    'type' => 'combos',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Any Bibimbop + Soy Bean Paste Soup', 
+                    'price' => 18.00, 
+                    'ingredients' => 'Bibimbop and soybean', 
+                    'type' => 'combos',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Soon Tofu', 
+                    'price' => 15.00, 
+                    'ingredients' => 'Spicy tofu soup with rice ', 
+                    'type' => 'combos',
+                    'restaurant_id' => 2,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+            ]
+        );
+    }
+}

@@ -6,7 +6,7 @@
         <h1 class="h2">Restaurant Creation</h1>
     </div>
 
-    <form method="POST" action="/dashboard">
+    <form method="POST" action="/dashboard" enctype="multipart/form-data">
         @csrf
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -44,16 +44,27 @@
                 <input type="text" name="zip_code" class="form-control" id="inputZip" placeholder="Zip Code">
             </div>
         </div>
-        <div class="form-group">
-            <label for="type">Type</label>
-            <select id="type" name="type" class="form-control">
-                @if ($types)
-                    <option selected disabled hidden>Choose a restaurant type</option>
-                    @foreach ($types as $type)
-                        <option value="{{$type}}">{{ucfirst(trans($type))}}</option>
-                    @endforeach
-                @endif
-            </select>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="type">Type</label>
+                <select id="type" name="type" class="form-control">
+                    @if ($types)
+                        <option selected disabled hidden>Choose a restaurant type</option>
+                        @foreach ($types as $type)
+                            <option value="{{$type}}">{{ucfirst(trans($type))}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Image</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input accept="image/jpg, image/jpeg, image/png" name="image" type="file" class="custom-file-input" id="RestaurantImage" aria-describedby="RestaurantImage">
+                        <label class="custom-file-label imageLabel" for="RestaurantImage">Choose file</label>
+                    </div>
+                </div> 
+            </div>
         </div>
         <div class="form-group">
             <label for="description">Description</label>

@@ -44,4 +44,7 @@ Route::delete('/dashboard/restaurant/{id}/{menu_id}', 'MenuController@delete');
 Route::post('/dashboard/restaurant/{id}/category', 'MenuController@createCategory');
 Route::put('/dashboard/restaurant/{id}/category/{category_id}', 'MenuController@updateCategory');
 
+//Generate Website
+Route::get('/restaurant/{id}/{theme}', 'GenerateController@index');
+
 

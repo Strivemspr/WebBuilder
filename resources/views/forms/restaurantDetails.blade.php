@@ -28,7 +28,7 @@
 
         <div id="collapseOne" class="collapse p-3" aria-labelledby="headingOne"
             data-parent="#restaurantDetails">
-            <form method="POST" action="/dashboard/restaurant/{{$restaurant->id}}">
+            <form method="POST" action="/dashboard/restaurant/{{$restaurant->id}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-row">
@@ -67,24 +67,35 @@
                         <input type="text" name="zip_code" class="form-control" id="zip_code" value="{{$restaurant->zip_code}}" placeholder="Zip Code">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="type">Type</label>
-                    <select editable id="type" name="type" class="form-control">
-                        @if ($restaurant->type)
-                            @foreach ($types as $type)
-                                @if($type == $restaurant->type)
-                                    <option selected value="{{$type}}">{{ucfirst(trans($type))}}</option>
-                                @else
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="type">Type</label>
+                        <select editable id="type" name="type" class="form-control">
+                            @if ($restaurant->type)
+                                @foreach ($types as $type)
+                                    @if(ucfirst($type) == ucfirst($restaurant->type))
+                                        <option selected value="{{$type}}">{{ucfirst(trans($type))}}</option>
+                                    @else
+                                        <option value="{{$type}}">{{ucfirst(trans($type))}}</option>
+                                    @endif
+                                @endforeach
+                            @else
+                                <option selected disabled hidden>Choose a restaurant type</option>
+                                @foreach ($types as $type)
                                     <option value="{{$type}}">{{ucfirst(trans($type))}}</option>
-                                @endif
-                            @endforeach
-                        @else
-                            <option selected disabled hidden>Choose a restaurant type</option>
-                            @foreach ($types as $type)
-                                <option value="{{$type}}">{{ucfirst(trans($type))}}</option>
-                            @endforeach
-                        @endif
-                    </select>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Image</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input accept="image/jpg, image/jpeg, image/png" name="image" type="file" class="custom-file-input" id="updateRestaurantImage">
+                                <label class="custom-file-label imageLabel" for="updateRestaurantImage">{{$restaurant->image}}</label>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>

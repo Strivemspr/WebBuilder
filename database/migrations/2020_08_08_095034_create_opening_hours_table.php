@@ -62,18 +62,57 @@ class CreateOpeningHoursTable extends Migration
             $table->integer("restaurant_id");
         });
 
-        // DB::table('opening_hours')->insert(
-        //     [     
-        //         [
-        //             'day_of_the_week' => 'Monday', 
-        //             'start_time' => '5:00', 
-        //             'end_time' => '10:00',
-        //             'restaurant_id' => 1,
-        //             'created_at' =>  date('Y-m-d H:i:s'),
-        //             'updated_at' => date('Y-m-d H:i:s'),
-        //         ],
-        //     ]
-        // );
+        DB::table('opening_hours')->insert(
+            [     
+                [
+                    'day_of_the_week1' => 'Monday', 
+                    'start_time1' => '9:30', 
+                    's_time1' => 'am',
+                    'end_time1' => "5:00",
+                    'e_time1' => "pm",
+
+                    'day_of_the_week2' => 'Tuesday', 
+                    'start_time2' => '9:30', 
+                    's_time2' => 'am',
+                    'end_time2' => "5:00",
+                    'e_time2' => "pm",
+
+                    'day_of_the_week3' => 'Wednesday', 
+                    'start_time3' => '9:30', 
+                    's_time3' => 'am',
+                    'end_time3' => "5:00",
+                    'e_time3' => "pm",
+
+                    'day_of_the_week4' => 'Thursday', 
+                    'start_time4' => '9:30', 
+                    's_time4' => 'am',
+                    'end_time4' => "5:00",
+                    'e_time4' => "pm",
+
+                    'day_of_the_week5' => 'Friday', 
+                    'start_time5' => '9:30', 
+                    's_time5' => 'am',
+                    'end_time5' => "5:00",
+                    'e_time5' => "pm",
+
+                    // 'day_of_the_week6' => 'Monday', 
+                    // 'start_time1' => '9:30', 
+                    // 's_time1' => 'am',
+                    // 'end_time1' => "5:00",
+                    // 'e_time1' => "pm",
+
+                    // 'day_of_the_week7' => 'Monday', 
+                    // 'start_time1' => '9:30', 
+                    // 's_time1' => 'am',
+                    // 'end_time1' => "5:00",
+                    // 'e_time1' => "pm",
+                    
+                    'restaurant_id' => 1,
+                    'created_at' =>  date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+            ]
+        );
     }
 
     /**

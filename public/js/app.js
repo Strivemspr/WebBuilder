@@ -39758,18 +39758,18 @@ var buttonAdd = document.querySelector('#buttonAdd');
 var buttonRemove = document.querySelector('#buttonRemove');
 var currentItems = Array.from(document.querySelectorAll('#addMenuItemsForm > div'));
 var categories = [];
-buttonAdd.addEventListener('click', addItem);
-buttonRemove.addEventListener('click', removeItem);
+if (buttonAdd) buttonAdd.addEventListener('click', addItem);
+if (buttonRemove) buttonRemove.addEventListener('click', removeItem);
 var count = currentItems.length;
 
 function addItem() {
   getCateriesOptions();
   count = count + 1;
-  var html = "\n    <div class=\"form-row bg-light mb-3 p-4 dish-items\">\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishName2\">Dish Name: <span class=\"badge badge-primary\"></span></label>\n            <input type=\"text\" name=\"dishName[]\" class=\"form-control\" id=\"dishName".concat(count, "\" value=\"\" placeholder=\"Dish Name\">\n        </div>\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishPrice2\">Dish Price</label>\n            <input type=\"text\" name=\"dishPrice[]\" class=\"form-control\" id=\"dishPrice").concat(count, "\" value=\"\" placeholder=\"Dish Price\">\n        </div>\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishIngredients2\">Dish Ingredients</label>\n            <input type=\"text\" name=\"dishIngredients[]\" class=\"form-control\" id=\"dishIngredients").concat(count, "\" value=\"\" placeholder=\"Dish Ingredients\">\n        </div>\n        <div class=\"form-group m-0 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishType2\">Dish Type</label>\n            <select name=\"dishType[]\" class=\"form-control\" id=\"dishType").concat(count, "\">\n                ").concat(function () {
+  var html = "\n    <div class=\"form-row bg-light mb-3 p-4 dish-items\">\n        <div class=\"form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishName2\">Dish Name: <span class=\"badge badge-primary\"></span></label>\n            <input type=\"text\" name=\"dishName[]\" class=\"form-control\" id=\"dishName".concat(count, "\" value=\"\" placeholder=\"Dish Name\">\n        </div>\n        <div class=\"form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishPrice2\">Dish Price</label>\n            <input type=\"text\" name=\"dishPrice[]\" class=\"form-control\" id=\"dishPrice").concat(count, "\" value=\"\" placeholder=\"Dish Price\">\n        </div>\n        <div class=\"form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishIngredients2\">Dish Ingredients</label>\n            <input type=\"text\" name=\"dishIngredients[]\" class=\"form-control\" id=\"dishIngredients").concat(count, "\" value=\"\" placeholder=\"Dish Ingredients\">\n        </div>\n        <div class=\"form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6\">\n            <label for=\"dishType2\">Dish Type</label>\n            <select name=\"dishType[]\" class=\"form-control\" id=\"dishType").concat(count, "\">\n                ").concat(function () {
     var html = "";
 
     if (categories.length > 0) {
-      html = "<option selected disabled hidden>Please Select A Category</option>";
+      html = "<option selected hidden value=\"\">Please Select A Category</option>";
 
       for (var _count = 0; _count < categories.length; _count++) {
         html += "<option value=\"".concat(categories[_count], "\">").concat(categories[_count], "</option>");
@@ -39779,7 +39779,7 @@ function addItem() {
     } else {
       return html = "<option selected disabled value=\"null\">There are no categories yet</option>";
     }
-  }(), "\n            </select>\n        </div>\n    </div>\n");
+  }(), "\n            </select>\n        </div>\n        <div class=\"form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6\">\n            <label>Image</label>\n            <div class=\"input-group\">\n                <div class=\"custom-file\">\n                    <input accept=\"image/jpg, image/jpeg, image/png\" name=\"image[]\" type=\"file\" class=\"custom-file-input\" id=\"dishImage").concat(count, "\" aria-describedby=\"RestaurantImage\">\n                    <label class=\"custom-file-label imageLabel\" for=\"dishImage").concat(count, "\">Choose file</label>\n                </div>\n            </div> \n        </div>\n    </div>\n");
   form.innerHTML += html;
 }
 
@@ -39808,7 +39808,7 @@ function getCateriesOptions() {
 
 
 var categoriesForm = document.querySelector('#menuCategories');
-categoriesForm.addEventListener('click', deleteMenuCategory);
+if (categoriesForm) categoriesForm.addEventListener('click', deleteMenuCategory);
 
 function deleteMenuCategory(event) {
   event.preventDefault();
@@ -39825,8 +39825,8 @@ var buttonRemoveCategory = document.querySelector('#buttonRemoveCategory');
 var categoryItemsContainer = document.querySelector("#categoryItems");
 var currentCategoryItems = Array.from(document.querySelectorAll('#categoryItems > div'));
 var categoryItemsCount = currentCategoryItems.length;
-buttonAddCategory.addEventListener('click', addCategory);
-buttonRemoveCategory.addEventListener('click', removeCategory);
+if (buttonAddCategory) buttonAddCategory.addEventListener('click', addCategory);
+if (buttonRemoveCategory) buttonRemoveCategory.addEventListener('click', removeCategory);
 
 function addCategory() {
   categoryItemsCount = categoryItemsCount + 1;
@@ -39840,7 +39840,22 @@ function removeCategory() {
     categoryItemsContainer.removeChild(categoryItemsContainer.lastElementChild);
     categoryItemsCount--;
   }
+} // Set label Name when image is choosen
+
+
+var images = document.querySelector('input[type="file"]');
+var imageText;
+
+if (images) {
+  imageText = images.closest('div').querySelector('.imageLabel');
 }
+
+if (images && imageText) images.addEventListener('change', changeLabelText);
+
+function changeLabelText(event) {
+  var fileName = event.target.files[0].name;
+  imageText.innerHTML = fileName;
+} //Use event bubbling to solve this problem.
 
 /***/ }),
 

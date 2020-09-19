@@ -27,7 +27,7 @@ class DashboardController extends Controller
 
     // Types
 
-    public $types = array('Chinese', 'Japanese', 'Vietnamese', 'Korean', 'Cafe', 'Indian', 'Thai', 'Indonesian');
+    public $types = array('Common', 'Chinese', 'Japanese', 'Vietnamese', 'Korean', 'Cafe', 'Indian', 'Thai', 'Indonesian');
     public $times = array('am', 'pm');
 
     /**
@@ -109,6 +109,17 @@ class DashboardController extends Controller
         $restaurant->description =  $request->input('description');
         $restaurant->type =  $request->input('type');
         $restaurant->user_id = auth()->user()->id;
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('img/restaurantImages/', $filename);
+            $restaurant->image = $filename;
+        } else {
+            return $request;
+            $restaurant->image = '';
+        }
 
         $restaurant->save();
         
@@ -203,6 +214,14 @@ class DashboardController extends Controller
         $restaurant->description =  $request->input('description');
         $restaurant->type =  $request->input('type');
         $restaurant->user_id = auth()->user()->id;
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('img/restaurantImages/', $filename);
+            $restaurant->image = $filename;
+        }
 
         $restaurant->save();
         

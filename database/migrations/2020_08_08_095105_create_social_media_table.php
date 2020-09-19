@@ -23,18 +23,18 @@ class CreateSocialMediaTable extends Migration
             $table->timestamps();
         });
 
-        // DB::table('social_media')->insert(
-        //     [     
-        //         [
-        //             'facebook' => '100009792617708', 
-        //             'instagram' => 'koaasy', 
-        //             'twitter' => 'koaasy',
-        //             'restaurant_id' => 1,
-        //             'created_at' =>  date('Y-m-d H:i:s'),
-        //             'updated_at' => date('Y-m-d H:i:s'),
-        //         ],
-        //     ]
-        // );
+        DB::table('social_media')->insert(
+            [     
+                [
+                    'facebook' => '100009792617708', 
+                    'instagram' => 'koaasy', 
+                    'twitter' => 'koaasy',
+                    'restaurant_id' => 1,
+                    'created_at' =>  date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+            ]
+        );
     }
 
     /**

@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <title>Italian Restaurant</title>
+        <title>{{ config('app.name', 'Atrium') }}</title>
     </head>
     <body>
         @include('inc.navbar')
@@ -22,3 +22,5 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </html>
+
+{{-- TODELETE --}}

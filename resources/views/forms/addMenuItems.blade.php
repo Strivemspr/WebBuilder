@@ -58,7 +58,7 @@
             </div>
             <hr>
             <div class="mb-3">
-                <h4 class="mb-3"><span class="badge badge-primary">Update Categories</span></h4>
+                <h4 class="mb-3"><span class="badge badge-primary">Current Categories</span></h4>
                 @if($restaurant->categories)
                 <form id="updateMenuCategories" method="POST" action="/dashboard/restaurant/{{$restaurant->id}}/category/{{$restaurant->categories->id}}">
                     @csrf
@@ -69,9 +69,9 @@
                                 <div class="form-group m-1 categoryItem">
                                     <label for="category{{$key + 1}}">Category {{$key + 1}}<span class="badge badge-primary"></span></label>
                                     <div class="input-group">
-                                        <input type="text" name="categoryUpdate[]" class="form-control" value="{{ucfirst($category)}}" id="category{{$key + 1}}" placeholder="Category">
+                                        <input type="text" name="categoryUpdate[]" class="form-control" value="{{$category}}" id="category{{$key + 1}}" placeholder="Category">
                                         <div class="input-group-append">
-                                            <button class="btn btn-danger delete" type="button">Delete</button>
+                                            {{-- <button class="btn btn-danger delete" type="button">Delete</button> --}}
                                         </div>
                                     </div>        
                                 </div>
@@ -87,7 +87,11 @@
                         <p class="m-0">You have not added any categories yet</p>
                     </div>
                 @endif
-                <input type="submit" class="btn btn-primary" value="Save" onclick="document.querySelector('#updateMenuCategories').submit()">
+                {{-- <input type="submit" class="btn btn-primary" value="Save" onclick="document.querySelector('#updateMenuCategories').submit()"> --}}
+                <div class="d-flex align-items-center">
+                    <input type="submit" class="btn btn-danger mr-2" value="Delete" onclick="document.querySelector('#updateMenuCategories').submit()">
+                    <p class="m-0">Deletes categories that are not in use</p>
+                </div>
             </div>
             <hr>
             <div>
@@ -95,24 +99,24 @@
                 <form id="addMenuItemsForm" method="POST" action="/dashboard/restaurant/{{$restaurant->id}}/menu">
                     @csrf
                     <div class="form-row bg-light mb-3 p-4 dish-items">
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishName1">Dish Name: <span class="badge badge-primary"></span></label>
                             <input type="text" name="dishName[]" class="form-control" id="dishName1" value="" placeholder="Dish Name">
                         </div>
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishPrice1">Dish Price</label>
                             <input type="text" name="dishPrice[]" class="form-control" id="dishPrice1" value="" placeholder="Dish Price">
                         </div>
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishIngredients1">Dish Ingredients</label>
                             <input type="text" name="dishIngredients[]" class="form-control" id="dishIngredients1" value="" placeholder="Dish Ingredients">
                         </div>
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishType1">Dish Type</label>
                             {{-- <input type="text" name="dishType[]" class="form-control" id="dishType1" value="" placeholder="Dish Type"> --}}
                             <select name="dishType[]" class="form-control" id="dishType1">
                                 @if ($restaurant->categories && $restaurant->categories->categories)
-                                    <option selected disabled hidden>Please Select A Category</option>
+                                    <option selected hidden value="">Please Select A Category</option>
                                     @foreach (explode(',',$restaurant->categories->categories) as $category))
                                     <option value="{{$category}}">{{$category}}</option>
                                     @endforeach
@@ -120,28 +124,37 @@
                                     <option selected disabled value="null">There are no categories yet</option>
                                 @endif
                             </select>
+                        </div>
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
+                            <label>Image</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input accept="image/jpg, image/jpeg, image/png" name="image[]" type="file" class="custom-file-input" id="dishImage1" aria-describedby="RestaurantImage">
+                                    <label class="custom-file-label imageLabel" for="dishImage1">Choose file</label>
+                                </div>
+                            </div> 
                         </div>
                     </div>
 
                     <div class="form-row bg-light mb-3 p-4 dish-items">
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishName2">Dish Name: <span class="badge badge-primary"></span></label>
                             <input type="text" name="dishName[]" class="form-control" id="dishName2" value="" placeholder="Dish Name">
                         </div>
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishPrice2">Dish Price</label>
                             <input type="text" name="dishPrice[]" class="form-control" id="dishPrice2" value="" placeholder="Dish Price">
                         </div>
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishIngredients2">Dish Ingredients</label>
                             <input type="text" name="dishIngredients[]" class="form-control" id="dishIngredients2" value="" placeholder="Dish Ingredients">
                         </div>
-                        <div class="form-group m-0 col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
                             <label for="dishType2">Dish Type</label>
                             {{-- <input type="text" name="dishType[]" class="form-control" id="dishType2" value="" placeholder="Dish Type"> --}}
                             <select name="dishType[]" class="form-control" id="dishType2">
                                 @if ($restaurant->categories && $restaurant->categories->categories)
-                                    <option selected disabled hidden>Please Select A Category</option>
+                                    <option selected hidden value="">Please Select A Category</option>
                                     @foreach (explode(',',$restaurant->categories->categories) as $category))
                                     <option value="{{$category}}">{{$category}}</option>
                                     @endforeach
@@ -149,6 +162,15 @@
                                     <option selected disabled value="null">There are no categories yet</option>
                                 @endif
                             </select>
+                        </div>
+                        <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
+                            <label>Image</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input accept="image/jpg, image/jpeg, image/png" name="image[]" type="file" class="custom-file-input" id="dishImage2">
+                                    <label class="custom-file-label imageLabel" for="dishImage2">Choose file</label>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 </form>
