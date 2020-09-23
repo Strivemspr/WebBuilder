@@ -96,7 +96,7 @@
             <hr>
             <div>
                 <h4 class="mb-3"><span class="badge badge-primary">Add Dish Items</span></h4>
-                <form id="addMenuItemsForm" method="POST" action="/dashboard/restaurant/{{$restaurant->id}}/menu">
+                <form id="addMenuItemsForm" method="POST" action="/dashboard/restaurant/{{$restaurant->id}}/menu" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row bg-light mb-3 p-4 dish-items">
                         <div class="form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6">
@@ -129,7 +129,7 @@
                             <label>Image</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input accept="image/jpg, image/jpeg, image/png" name="image[]" type="file" class="custom-file-input" id="dishImage1" aria-describedby="RestaurantImage">
+                                    <input accept="image/jpg, image/jpeg, image/png" name="dishImage[]" type="file" class="custom-file-input imageInput" id="dishImage1" aria-describedby="RestaurantImage">
                                     <label class="custom-file-label imageLabel" for="dishImage1">Choose file</label>
                                 </div>
                             </div> 
@@ -167,7 +167,7 @@
                             <label>Image</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input accept="image/jpg, image/jpeg, image/png" name="image[]" type="file" class="custom-file-input" id="dishImage2">
+                                    <input accept="image/jpg, image/jpeg, image/png" name="dishImage[]" type="file" class="custom-file-input imageInput" id="dishImage2">
                                     <label class="custom-file-label imageLabel" for="dishImage2">Choose file</label>
                                 </div>
                             </div> 

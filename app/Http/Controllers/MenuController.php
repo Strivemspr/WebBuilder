@@ -156,18 +156,34 @@ class MenuController extends Controller
         $dishPrice = $request->dishPrice;
         $dishIngredients = $request->dishIngredients;
         $dishType = $request->dishType;
+        $dishImage = $request->file('dishImage');
 
-        // print_r(dd(request()->all()));
+
+        // print_r(dd($request->hasFile('dishImage')));
+        // print_r(dd($dishImage[0]->getClientOriginalName()));
+
 
         // Loop Throuhg Values
         $data = [];
 
-        for ($count=0; $count < count($dishName); $count++) { 
+        for ($count=0; $count < count($dishName); $count++) {
+            if($request->hasFile('dishImage')) {
+                $file = $dishImage[$count];
+                $extension = $file->getClientOriginalExtension();
+                $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $filename = $name . "-" . time() . $count . '.' . $extension;
+                $file->move('img/menuImages/', $filename);
+                $image = $filename;
+            } else {
+                $image = '';
+            }
+
             $dish = array(
                 'name' => $dishName[$count],
                 'price' => $dishPrice[$count],
                 'ingredients' => $dishIngredients[$count],
                 'type' => $dishType[$count],
+                'image' => $image,
                 'restaurant_id' => $restaurant_id,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -175,9 +191,11 @@ class MenuController extends Controller
             $data[] = $dish;
         }
 
+        
+
         // Insert Data
         DB::table('menus')->insert($data);
-        Menu::insert($data);
+        // Menu::insert($data);
 
         // Redirect
         return redirect('/dashboard/restaurant/'.$restaurant_id.'/edit')->with('success', 'Restaurant Items Have Been Added Successfully');
@@ -192,6 +210,17 @@ class MenuController extends Controller
         $menu->ingredients = $request->input('dishIngredients');
         $menu->type = $request->input('dishType');
         $menu->restaurant_id = $restaurant_id;
+
+        if($request->hasFile('dishImage')) {
+            $file = $request->file('dishImage');
+            $extension = $file->getClientOriginalExtension();
+            $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filename = $name . "-" . time() . '.' . $extension; //TODO: implement a better unique id for each image 
+            $file->move('img/menuImages/', $filename);
+            $menu->image = $filename;
+        } //16006711781
+
+        // print_r($filename);
 
         $menu->save();
 

@@ -45,9 +45,9 @@
 
         {{-- CONTENT --}}
         <div>
-            <main class="italian-theme">
-                <div class="position-relative overflow-hidden text-center banner-italian">
-                    <div class="col-md-5 p-lg-5 mx-auto my-5 text-italian">
+            <main class="common-theme">
+                <div class="position-relative overflow-hidden text-center banner-common">
+                    <div class="col-md-5 p-lg-5 mx-auto my-5 text-common">
                         <h1 class="display-4 font-weight-bold">{{$restaurant->name}}</h1>
                         {{-- <p class="lead font-weight-normal">{{$restaurant->description}}</p> --}}
                         {{-- <a class="btn btn-primary btn-lg" href="#">Contact us</a> --}}
@@ -65,23 +65,26 @@
                 </section>
 
                 <section class="container pt-4 pb-5" id="menu">
-                    <div class="italian-menu-description">
+                    <div class="common-menu-description">
                         <h1 class="display-4 font-weight-bold">Our Menu</h1>
                     </div>
 
                     @if ($restaurant->menu)
-                    <div class="italian-card-container">
+                    <div class="common-card-container">
                         @foreach ($types as $type)
-                            <h2>{{ucfirst($type)}}</h2>
+                            <h2 class="mt-3">{{ucfirst($type)}}</h2>
                             @if (count($menus) > 0)
                                 @foreach ($menus as $menu)
                                     @if ($menu->type == $type)
-                                    <div class="italian-card">
-                                        <div class="italian-card-img">
-                                            <img src="{{asset('img/breakfast-2.jpg')}}" alt="">
+                                    <div class="common-card d-flex">
+                                        @if ($menu->image)
+                                        <div class="common-card-img">
+                                            {{-- <img src="{{asset('img/restaurantImages/2.jpg')}}" alt=""> --}}
+                                            <img src="{{asset('img/menuImages/'.$menu->image)}}" alt="{{$menu->name}}">
                                         </div>
-                                        <div class="italian-card-text">
-                                            <h3>{{$menu->name}} <small class="text-secondary">{{!empty($menu->price) && $menu->price != 0 ? $menu->price : ""}}</small></h3>
+                                        @endif
+                                        <div class="common-card-text">
+                                            <h3>{{$menu->name}} <small class="text-secondary">{{!empty($menu->price) && $menu->price != 0 ? "$".$menu->price : ""}}</small></h3>
                                             <p class="text-secondary">{{$menu->ingredients}}</p>
                                         </div>
                                     </div>
@@ -238,7 +241,7 @@
                             <li><a class="text-muted" target="_blank" href="https://www.facebook.com/profile.php?id={{$restaurant->socialMedia->facebook}}">Facebook</a></li>
                             @endempty
                             @empty(!$restaurant->socialMedia->instagram)
-                            <li><a class="text-muted" target="_blank" href="https://www.instagram.com/{{$restaurant->socialMedia->instagram}}/">Instagram</a></li>
+                            <li><a class="text-muted" target="_blank" href="https://www.instagram.com/{{$restaurant->socialMedia->instagram}}">Instagram</a></li>
                             @endempty
                             @empty(!$restaurant->socialMedia->twitter)
                             <li><a class="text-muted" target="_blank" href="https://twitter.com/{{$restaurant->socialMedia->twitter}}">Twitter</a></li>

@@ -52,7 +52,7 @@ function addItem() {
             <label>Image</label>
             <div class="input-group">
                 <div class="custom-file">
-                    <input accept="image/jpg, image/jpeg, image/png" name="image[]" type="file" class="custom-file-input" id="dishImage${count}" aria-describedby="RestaurantImage">
+                    <input accept="image/jpg, image/jpeg, image/png" name="dishImage[]" type="file" class="custom-file-input" id="dishImage${count}" aria-describedby="RestaurantImage">
                     <label class="custom-file-label imageLabel" for="dishImage${count}">Choose file</label>
                 </div>
             </div> 
@@ -147,7 +147,22 @@ function changeLabelText(event) {
     imageText.innerHTML = fileName;
 }
 
-//Use event bubbling to solve this problem.
+//updates images text on input on the create dish items form and update items form
+let dishUpdateForm = document.querySelector('.formsContainer');
+
+form.addEventListener('change', loadImage);
+dishUpdateForm.addEventListener('change', loadImage);
+
+
+function loadImage(event) {
+    if(event.target.classList.contains("imageInput")) {
+        fileName = event.target.files[0].name;
+        labelText = event.target.closest('div').querySelector('.imageLabel');
+        labelText.innerHTML = fileName;
+    }
+}
+
+
 
 
 

@@ -39779,7 +39779,7 @@ function addItem() {
     } else {
       return html = "<option selected disabled value=\"null\">There are no categories yet</option>";
     }
-  }(), "\n            </select>\n        </div>\n        <div class=\"form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6\">\n            <label>Image</label>\n            <div class=\"input-group\">\n                <div class=\"custom-file\">\n                    <input accept=\"image/jpg, image/jpeg, image/png\" name=\"image[]\" type=\"file\" class=\"custom-file-input\" id=\"dishImage").concat(count, "\" aria-describedby=\"RestaurantImage\">\n                    <label class=\"custom-file-label imageLabel\" for=\"dishImage").concat(count, "\">Choose file</label>\n                </div>\n            </div> \n        </div>\n    </div>\n");
+  }(), "\n            </select>\n        </div>\n        <div class=\"form-group m-0 mb-2 col-lg-3 col-md-6 col-sm-6\">\n            <label>Image</label>\n            <div class=\"input-group\">\n                <div class=\"custom-file\">\n                    <input accept=\"image/jpg, image/jpeg, image/png\" name=\"dishImage[]\" type=\"file\" class=\"custom-file-input\" id=\"dishImage").concat(count, "\" aria-describedby=\"RestaurantImage\">\n                    <label class=\"custom-file-label imageLabel\" for=\"dishImage").concat(count, "\">Choose file</label>\n                </div>\n            </div> \n        </div>\n    </div>\n");
   form.innerHTML += html;
 }
 
@@ -39855,7 +39855,20 @@ if (images && imageText) images.addEventListener('change', changeLabelText);
 function changeLabelText(event) {
   var fileName = event.target.files[0].name;
   imageText.innerHTML = fileName;
-} //Use event bubbling to solve this problem.
+} //updates images text on input on the create dish items form and update items form
+
+
+var dishUpdateForm = document.querySelector('.formsContainer');
+form.addEventListener('change', loadImage);
+dishUpdateForm.addEventListener('change', loadImage);
+
+function loadImage(event) {
+  if (event.target.classList.contains("imageInput")) {
+    fileName = event.target.files[0].name;
+    labelText = event.target.closest('div').querySelector('.imageLabel');
+    labelText.innerHTML = fileName;
+  }
+}
 
 /***/ }),
 

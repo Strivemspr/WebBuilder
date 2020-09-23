@@ -9,21 +9,29 @@ function closeNav() {
 
 
 (function($) {
-
+  
+  var menuItems = $("#menu-wrapper").children();
   // Menu filer
   $("#menu-flters li a").click(function() {
     $("#menu-flters li a").removeClass('active');
     $(this).addClass('active');
 
     var selectedFilter = $(this).data("filter");
-    //  $("#menu-wrapper").fadeTo(100, 0);
 
-    $(".menu-restaurant").fadeOut();
+    console.log(selectedFilter);
 
-    setTimeout(function() {
-      $(selectedFilter).slideDown();
-      //$("#menu-wrapper").fadeTo(300, 1);
-    }, 300);
+    var filteredItems = [];
+
+    for (let count = 0; count < menuItems.length; count++) {
+      if((menuItems[count].className.includes(selectedFilter))) {
+        item = menuItems[count];
+        filteredItems.push(item);
+      }
+    }
+
+    console.log(filteredItems);
+
+    $("#menu-wrapper").html(filteredItems);
   });
 
   // Add smooth scrolling to all links in navbar + footer link

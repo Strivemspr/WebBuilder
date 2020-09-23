@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <title>{{$restaurant->name}}</title>
+        <title>{{$restaurant->name ? $restaurant->name : "Company Name"}}</title>
 
         {{-- Theme Related --}} 
 
@@ -33,9 +33,12 @@
 <section class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<a href="#" class="navbar-brand">Japanese Cuisine</a>
+			<a href="#" class="navbar-brand">{{$restaurant->name ? $restaurant->name : "Company Name"}}</a>
 		</div>
-			</div>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a class="nav-link text-dark" href="/">Back to Atrium</a></li>
+		</ul>
+	</div>
 </section>
 
 
@@ -44,9 +47,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<h1>JAPANESE RESTAURANT</h1>
-				<h2>SUSHI DONBURI</h2>
-				</div>
+				<h1>{{$restaurant->name ? $restaurant->name : "Company Name"}}</h1>
+				<h2>{{$restaurant->description}}</h2>
+			</div>
 		</div>
 	</div>		
 </section>
@@ -54,48 +57,41 @@
 
 
 <!-- menu section -->
+@if ($restaurant->menu)
 <section id="menu" class="parallax-section bg-light">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 mb-5 text-center">
-				<h1 class="heading">Special Menu</h1>
-				<hr>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>Edamame - <span>$7.50</span></h4>
-				<h5>Edamame soybeans, steamed and seasoned with sea salt</h5>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>Spinach - <span>$9.50</span></h4>
-				<h5>Fresh spinach, gently steamed and served with Kura’s original sesame sauce</h5>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>Takowasabi <span>$10.75</span></h4>
-				<h5>Fresh octopus in a wasabi marinade, a spicy Japanese delicacy</h5>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>Agedashi tofu - <span>$5.00</span></h4>
-				<h5>Crispy fried tofu served in a delicate fish and soy broth</h5>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>sashimi - <span>$6.00</span></h4>
-				<h5>A selection of the best available market fresh fish</h5>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>Spider roll - <span>$7.50</span></h4>
-				<h5>Rolled sushi with crispy fried soft shell crab</h5>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>Teriyaki chicken - <span>$10.75</span></h4>
-				<h5>Pan fried chicken marinated in a sweet and sticky teriyaki sauce</h5>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<h4>Teriyaki style grilled salmon fillets - <span>$20.50</span></h4>
-				<h5>Pan fried salmon marinated in a sweet and sticky teriyaki sauce</h5>
-			</div>
+			@foreach ($types as $type)
+				<div class="col-md-12 my-5 text-center">
+					<h1 class="heading">{{ucfirst($type)}}</h1>
+					<hr>
+				</div>
+				@if (count($menus) > 0)
+					@foreach ($menus as $menu)
+						@if ($menu->type == $type)
+						<div class="col-md-6 col-sm-6 p-2">
+							<div class="card">
+								<div class="row card-body">
+								<div class="col-sm-6">
+										<h3 class="card-title">{{$menu->name}} <span>{{!empty($menu->price) && $menu->price != 0 ? "$".$menu->price : ""}}</span></h3>
+										<p class="card-text">{{$menu->ingredients}}</p>
+									</div>
+									@if ($menu->image)
+									<img class="col-sm-6" src="{{asset('img/menuImages/'.$menu->image)}}" alt="{{$menu->name}}"/>
+									@endif
+								</div>
+							</div>
+						</div>
+						@endif
+					@endforeach
+				@else
+					<p class="Lead">No Menu found in the database</p>
+				@endif
+			@endforeach
 		</div>
 	</div>
 </section>		
+@endif
 
 
 <!-- contact section -->
@@ -135,34 +131,60 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
-				<h2 class="heading">Contact Info.</h2>
-				<div class="ph">
-					<p><i class="fa fa-phone"></i> Phone</p>
-					<h4>+64 080-0760</h4>
-				</div>
-				<div class="address">
-					<p><i class="fa fa-map-marker"></i> Our Location</p>
-					<h4>120 Duis aute irure, Auckland, NZ</h4>
-				</div>
+				@if ($restaurant->phone || $restaurant->street_address)
+					<h2 class="heading">Contact Us</h2>
+
+					@if ($restaurant->phone)
+						<div class="ph">
+							<p><i class="fa fa-phone"></i> Phone</p>
+							<h4>{{$restaurant->phone}}</h4>
+						</div>
+					@endif
+					
+					@if ($restaurant->street_address)
+						<div class="address">
+							<p><i class="fa fa-map-marker"></i> Our Location</p>
+							<h4>{{$restaurant->street_address}}</h4>
+						</div>
+					@endif
+				@endif
 			</div>
+
+			@if($restaurant->openingHours)
 			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
 				<h2 class="heading">Open Hours</h2>
-					<p>Monday <span>10:30 AM - 10:00 PM</span></p>
-					<p>Tuesday <span>9:00 AM - 8:00 PM</span></p>
-					<p>Wednesday <span>11:30 AM - 10:00 PM</span></p>
-					<p>Thursday <span>11:30 AM - 10:00 PM</span></p>
-					<p>Friday <span>11:30 AM - 10:00 PM</span></p>
-					<p>Saturday <span>11:30 AM - 10:00 PM</span></p>
-					<p>Sunday <span>11:30 AM - 10:00 PM</span></p>
+				<p>{{$restaurant->openingHours->day_of_the_week1}} <span>{{$restaurant->openingHours->start_time1}} {{$restaurant->openingHours->s_time1}} {{!empty($restaurant->openingHours->start_time1) ? "-" : ""}} {{$restaurant->openingHours->end_time1}} {{$restaurant->openingHours->e_time1}}</span></p>
+
+				<p>{{$restaurant->openingHours->day_of_the_week2}} <span>{{$restaurant->openingHours->start_time2}} {{$restaurant->openingHours->s_time2}} {{!empty($restaurant->openingHours->start_time2) ? "-" : ""}} {{$restaurant->openingHours->end_time2}} {{$restaurant->openingHours->e_time2}}</span></p>
+
+				<p>{{$restaurant->openingHours->day_of_the_week3}} <span>{{$restaurant->openingHours->start_time3}} {{$restaurant->openingHours->s_time3}} {{!empty($restaurant->openingHours->start_time3) ? "-" : ""}} {{$restaurant->openingHours->end_time3}} {{$restaurant->openingHours->e_time3}}</span></p>
+
+				<p>{{$restaurant->openingHours->day_of_the_week4}} <span>{{$restaurant->openingHours->start_time4}} {{$restaurant->openingHours->s_time4}} {{!empty($restaurant->openingHours->start_time4) ? "-" : ""}} {{$restaurant->openingHours->end_time4}} {{$restaurant->openingHours->e_time4}}</span></p>
+
+				<p>{{$restaurant->openingHours->day_of_the_week5}} <span>{{$restaurant->openingHours->start_time5}} {{$restaurant->openingHours->s_time5}} {{!empty($restaurant->openingHours->start_time5) ? "-" : ""}} {{$restaurant->openingHours->end_time5}} {{$restaurant->openingHours->e_time5}}</span></p>
+
+				<p>{{$restaurant->openingHours->day_of_the_week6}} <span>{{$restaurant->openingHours->start_time6}} {{$restaurant->openingHours->s_time6}} {{!empty($restaurant->openingHours->start_time6) ? "-" : ""}} {{$restaurant->openingHours->end_time6}} {{$restaurant->openingHours->e_time6}}</span></p>
+
+				<p>{{$restaurant->openingHours->day_of_the_week7}} <span>{{$restaurant->openingHours->start_time7}} {{$restaurant->openingHours->s_time7}} {{!empty($restaurant->openingHours->start_time7) ? "-" : ""}} {{$restaurant->openingHours->end_time7}} {{$restaurant->openingHours->e_time7}}</span></p>
 			</div>
+			@endif
+
+			@if ($restaurant->socialMedia)
 			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
 				<h2 class="heading">Follow Us</h2>
 				<ul class="social-icon">
-					<li><a href="#" class="fa fa-facebook wow bounceIn" data-wow-delay="0.3s"></a></li>
-					<li><a href="#" class="fa fa-twitter wow bounceIn" data-wow-delay="0.6s"></a></li>
-					<li><a href="#" class="fa fa-github wow bounceIn" data-wow-delay="0.9s"></a></li>
+					@empty(!$restaurant->socialMedia->facebook)
+					<li><a href="https://www.facebook.com/profile.php?id={{$restaurant->socialMedia->facebook}}" class="fa fa-facebook wow bounceIn" data-wow-delay="0.3s"></a></li>
+					@endempty
+					@empty(!$restaurant->socialMedia->instagram)
+					<li><a href="https://www.instagram.com/{{$restaurant->socialMedia->instagram}}" class="fa fa-instagram wow bounceIn" data-wow-delay="0.6s"></a></li>
+					@endempty
+					@empty(!$restaurant->socialMedia->twitter)
+					<li><a href="https://twitter.com/{{$restaurant->socialMedia->twitter}}" class="fa fa-twitter wow bounceIn" data-wow-delay="0.9s"></a></li>
+					@endempty
 				</ul>
 			</div>
+			@endif
 		</div>
 	</div>
 </footer>
@@ -173,10 +195,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<h3>JAPANESE</h3>
-				<p>Copyright © Japanese Cuisine
-                </p>
-                
+				<h3>{{$restaurant->name}}</h3>
+				<p>Copyright © Japanese Cuisine</p>
 			</div>
 		</div>
 	</div>

@@ -113,7 +113,8 @@ class DashboardController extends Controller
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
+            $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filename = $name . "-" . time() . '.' . $extension;
             $file->move('img/restaurantImages/', $filename);
             $restaurant->image = $filename;
         } else {
@@ -202,7 +203,7 @@ class DashboardController extends Controller
             'type' => 'required',
         ]);
 
-        // Create Restaurant
+        // Update Restaurant
         $restaurant->name = $request->input('name');
         $restaurant->phone = $request->input('phone');
         $restaurant->email = $request->input('email');
@@ -218,7 +219,8 @@ class DashboardController extends Controller
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
+            $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filename = $name . "-" . time() . '.' . $extension;
             $file->move('img/restaurantImages/', $filename);
             $restaurant->image = $filename;
         }
