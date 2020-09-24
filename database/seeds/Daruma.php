@@ -19,7 +19,7 @@ class Daruma extends Seeder
                     'price' => 2, 
                     'ingredients' => '', 
                     'type' => 'extras',
-                    'image' => '14.jpeg',
+                    'image' => '14.jpg',
                     'restaurant_id' => 3,
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),

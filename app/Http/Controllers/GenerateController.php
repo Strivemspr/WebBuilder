@@ -18,7 +18,7 @@ class GenerateController extends Controller
 
         // Store Variables
         $restaurant_id = $id;
-        $restaurant_theme = 'vietnamese'; // strtolower() add to this value
+        $restaurant_theme = $theme; // strtolower() add to this value
         
         // Find Menu and Restaurant based on the restaurant id
         $menus = Menu::where('restaurant_id', $restaurant_id)->get();

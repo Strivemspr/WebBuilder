@@ -17,6 +17,7 @@
         <div>
             @yield('content')
         </div>
+        @include('inc.footer')
     </body>
     @stack('scripts')
     <!-- Scripts -->

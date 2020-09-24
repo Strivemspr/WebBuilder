@@ -60,6 +60,7 @@
 @if ($restaurant->menu)
 <section id="menu" class="parallax-section bg-light">
 	<div class="container">
+		<h1 class="m-auto text-center">Menu</h1>
 		<div class="row">
 			@foreach ($types as $type)
 				<div class="col-md-12 my-5 text-center">
@@ -196,7 +197,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
 				<h3>{{$restaurant->name}}</h3>
-				<p>Copyright © Japanese Cuisine</p>
+				<p>Copyright © All rights reserved</p>
 			</div>
 		</div>
 	</div>
