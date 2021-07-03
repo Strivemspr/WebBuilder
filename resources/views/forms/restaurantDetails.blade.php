@@ -4,7 +4,7 @@
             <div class="input-group d-flex justify-content-between">
                 <h4 class="p-3 m-0">Restaurant Details</h4>
                 <div class="input-group-append">
-                    <button class="btn btn-primary btn-block feather-60 rounded-0" type="button" data-toggle="collapse"
+                    <button class="btn btn-primary btn-block feather-60 feather-group rounded-0" type="button" data-toggle="collapse"
                     data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-feather="menu">
                     </button>
                 </div>
